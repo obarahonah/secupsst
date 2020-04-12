@@ -24,6 +24,7 @@
 package secupassst;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -53,7 +54,27 @@ public class Secupassst {
        
     }
     
-    
+    static void printArray(int arr[])
+    {
+        int n = arr.length;
+        for (int i=0; i < n; ++i)
+            System.out.print(arr[i]+" ");
+        System.out.println();
+    }
+    static void printArrayString(String arr[])
+    {
+        int n = arr.length;
+        for (int i=0; i < n; ++i)
+            System.out.print(arr[i]+" ");
+        System.out.println();
+    }
+    static void printArrayStringMatrix(String arr[][])
+    {
+        int n = arr.length;
+        for (int i=0; i < n; ++i)
+            System.out.println(arr[i][0]+" "+arr[i][1]+" ");
+        System.out.println();
+    }
    
     
     

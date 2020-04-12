@@ -127,7 +127,8 @@ public class CryptoModule {
             ObjectInputStream ois = new ObjectInputStream(bos);
             String[][] matrix = (String[][])ois.readObject();
             fis.close();
-            
+            //sorting the matrix
+            Sorting.experimentalHeapSortStringMatrix(matrix);
             return matrix;
             
         } catch (Exception e) {

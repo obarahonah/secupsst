@@ -53,7 +53,6 @@ public class MainModule extends javax.swing.JFrame {
     protected File file;
     protected File file_ctrl;
     protected String state;
-    private CryptoModule modulo;
 
     public MainModule() throws IOException {
         initComponents();
@@ -67,7 +66,7 @@ public class MainModule extends javax.swing.JFrame {
             label_statusm.setText("A new file was created.");
         } else {
             state = (String) loaddata(file_ctrl);
-            if (state != "" && state != null) {
+            if (state.compareToIgnoreCase("")!=0 && state != null) {
                 label_statusm.setText("Encrypted file was loaded.");
                 //disabling buttons
                 btn_add.setEnabled(false);
@@ -173,7 +172,9 @@ public class MainModule extends javax.swing.JFrame {
         btn_remove = new javax.swing.JButton();
         btn_copy = new javax.swing.JButton();
         text_user = new javax.swing.JTextField();
-        label_add = new javax.swing.JLabel();
+        jLabel1 = new javax.swing.JLabel();
+        jLabel2 = new javax.swing.JLabel();
+        jLabel3 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Secupsst");
@@ -258,7 +259,11 @@ public class MainModule extends javax.swing.JFrame {
             }
         });
 
-        label_add.setText("Site                            User                              Password");
+        jLabel1.setText("Site");
+
+        jLabel2.setText("User");
+
+        jLabel3.setText("Password");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -268,22 +273,6 @@ public class MainModule extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(btn_remove, javax.swing.GroupLayout.PREFERRED_SIZE, 136, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                        .addGroup(layout.createSequentialGroup()
-                            .addGap(31, 31, 31)
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addComponent(label_add, javax.swing.GroupLayout.PREFERRED_SIZE, 340, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGroup(layout.createSequentialGroup()
-                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                        .addComponent(text_site, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addComponent(btn_add, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                    .addGap(6, 6, 6)
-                                    .addComponent(text_user, javax.swing.GroupLayout.PREFERRED_SIZE, 111, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addGap(6, 6, 6)
-                                    .addComponent(text_sitepassword, javax.swing.GroupLayout.PREFERRED_SIZE, 121, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addComponent(btn_copy, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 136, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(btn_save, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 136, javax.swing.GroupLayout.PREFERRED_SIZE)))
                         .addGroup(layout.createSequentialGroup()
                             .addGap(14, 14, 14)
                             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -298,7 +287,25 @@ public class MainModule extends javax.swing.JFrame {
                                 .addComponent(label_statusm, javax.swing.GroupLayout.PREFERRED_SIZE, 335, javax.swing.GroupLayout.PREFERRED_SIZE)))
                         .addGroup(layout.createSequentialGroup()
                             .addGap(30, 30, 30)
-                            .addComponent(scrollpanel, javax.swing.GroupLayout.PREFERRED_SIZE, 542, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                            .addComponent(scrollpanel, javax.swing.GroupLayout.PREFERRED_SIZE, 542, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGroup(layout.createSequentialGroup()
+                            .addGap(31, 31, 31)
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(text_site, javax.swing.GroupLayout.DEFAULT_SIZE, 100, Short.MAX_VALUE)
+                                .addComponent(btn_add, javax.swing.GroupLayout.DEFAULT_SIZE, 100, Short.MAX_VALUE))
+                            .addGap(6, 6, 6)
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(text_user, javax.swing.GroupLayout.DEFAULT_SIZE, 111, Short.MAX_VALUE))
+                            .addGap(6, 6, 6)
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                .addComponent(jLabel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(text_sitepassword, javax.swing.GroupLayout.DEFAULT_SIZE, 121, Short.MAX_VALUE))
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addComponent(btn_save, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 136, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(btn_copy, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 136, javax.swing.GroupLayout.PREFERRED_SIZE)))))
                 .addContainerGap(22, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -320,10 +327,16 @@ public class MainModule extends javax.swing.JFrame {
                         .addComponent(btn_decrypt, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(10, 10, 10)))
                 .addComponent(scrollpanel, javax.swing.GroupLayout.PREFERRED_SIZE, 298, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(13, 13, 13)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(label_add)
-                    .addComponent(btn_copy))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(13, 13, 13)
+                        .addComponent(btn_copy))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel1)
+                            .addComponent(jLabel2)
+                            .addComponent(jLabel3))))
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addGap(2, 2, 2)
@@ -352,7 +365,7 @@ public class MainModule extends javax.swing.JFrame {
     private void btn_addActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_addActionPerformed
         // TODO add your handling code here:
         // if a password have been set
-        if (text_sitepassword.getText() != "") {
+        if (text_sitepassword.getText().compareToIgnoreCase("")!=0) {
             if (state.equals("el")) {
                 model.addRow(new Object[]{text_site.getText(), text_user.getText(), text_sitepassword.getText()});
                 text_site.setText("");
@@ -361,6 +374,8 @@ public class MainModule extends javax.swing.JFrame {
             } else {
                 JOptionPane.showMessageDialog(null, "Decrypt the file before adding new data.");
             }
+        }else{
+            JOptionPane.showMessageDialog(null, "Add a password for the site.");
         }
 
     }//GEN-LAST:event_btn_addActionPerformed
@@ -465,7 +480,9 @@ public class MainModule extends javax.swing.JFrame {
     private javax.swing.JButton btn_decrypt;
     private javax.swing.JButton btn_remove;
     private javax.swing.JButton btn_save;
-    private javax.swing.JLabel label_add;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel label_password;
     private javax.swing.JLabel label_status;
     private javax.swing.JLabel label_statusm;
@@ -489,7 +506,7 @@ public class MainModule extends javax.swing.JFrame {
 
             String pass = new String(password_general.getPassword());
 
-            String matrix[][] = modulo.file_decrypt(pass, file);
+            String matrix[][] = CryptoModule.file_decrypt(pass, file);
             cleantable();
             if (matrix != null) {
                 matrixtotable(matrix);
@@ -536,7 +553,7 @@ public class MainModule extends javax.swing.JFrame {
                 matrix[i][2] = model.getValueAt(i, 2).toString();
                 //publish(l, i);
             }
-            modulo.file_encrypt(matrix, pass, file);
+            CryptoModule.file_encrypt(matrix, pass, file);
             cleantable();
             btn_decrypt.setEnabled(true);
             label_statusm.setText("Data was encrypted successfully");
