@@ -66,13 +66,14 @@ public class MainModule extends javax.swing.JFrame {
             label_statusm.setText("A new file was created.");
         } else {
             state = (String) loaddata(file_ctrl);
-            if (state.compareToIgnoreCase("")!=0 && state != null) {
+            if (state != null && state.compareToIgnoreCase("")!=0) {
                 label_statusm.setText("Encrypted file was loaded.");
                 //disabling buttons
                 btn_add.setEnabled(false);
                 btn_save.setEnabled(false);
                 btn_remove.setEnabled(false);
                 btn_copy.setEnabled(false);
+                btn_copy1.setEnabled(false);
             } else {
                 state = "el";
                 label_statusm.setText("A new file was created.");
@@ -144,6 +145,21 @@ public class MainModule extends javax.swing.JFrame {
             //System.out.println(result);
             Transferable transferable = new StringSelection(model.getValueAt(table_data.getSelectedRow(), 1).toString());
             clipboard.setContents(transferable, null);
+            label_statusm.setText("User copied to clipboard!");
+        }
+        //String s = model.getValueAt(jTable1.getSelectedRow(),1).toString();
+
+    }
+    private void copyPassword() {
+        Clipboard clipboard = Toolkit.getDefaultToolkit().getSystemClipboard();
+
+        int numRows = table_data.getSelectedRows().length;
+        if (numRows >= 1) {
+            //String result = model.getValueAt(jTable1.getSelectedRow(),1).toString();
+            //System.out.println(result);
+            Transferable transferable = new StringSelection(model.getValueAt(table_data.getSelectedRow(), 2).toString());
+            clipboard.setContents(transferable, null);
+            label_statusm.setText("Password copied to clipboard!");
         }
         //String s = model.getValueAt(jTable1.getSelectedRow(),1).toString();
 
@@ -175,6 +191,7 @@ public class MainModule extends javax.swing.JFrame {
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
+        btn_copy1 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Secupsst");
@@ -246,7 +263,7 @@ public class MainModule extends javax.swing.JFrame {
             }
         });
 
-        btn_copy.setText("Copy to clipboard");
+        btn_copy.setText("Copy user");
         btn_copy.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btn_copyActionPerformed(evt);
@@ -264,6 +281,13 @@ public class MainModule extends javax.swing.JFrame {
         jLabel2.setText("User");
 
         jLabel3.setText("Password");
+
+        btn_copy1.setText("Copy password");
+        btn_copy1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_copy1ActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -305,7 +329,8 @@ public class MainModule extends javax.swing.JFrame {
                             .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                 .addComponent(btn_save, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 136, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(btn_copy, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 136, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                                .addComponent(btn_copy, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 136, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(btn_copy1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 136, javax.swing.GroupLayout.PREFERRED_SIZE)))))
                 .addContainerGap(22, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -329,28 +354,34 @@ public class MainModule extends javax.swing.JFrame {
                 .addComponent(scrollpanel, javax.swing.GroupLayout.PREFERRED_SIZE, 298, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(13, 13, 13)
-                        .addComponent(btn_copy))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGap(21, 21, 21)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel1)
                             .addComponent(jLabel2)
-                            .addComponent(jLabel3))))
+                            .addComponent(jLabel3)))
+                    .addGroup(layout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(btn_copy)))
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addGap(2, 2, 2)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(text_site, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(19, 19, 19)
-                                .addComponent(btn_add))
                             .addComponent(text_user, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(text_sitepassword, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(18, 18, 18)
-                        .addComponent(btn_save, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGap(18, 18, 18)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(2, 2, 2)
+                                .addComponent(text_site, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(6, 6, 6))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(btn_copy1)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(btn_add)
+                            .addComponent(btn_save, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                .addGap(9, 9, 9)
                 .addComponent(btn_remove)
                 .addContainerGap())
         );
@@ -371,6 +402,7 @@ public class MainModule extends javax.swing.JFrame {
                 text_site.setText("");
                 text_user.setText("");
                 text_sitepassword.setText("");
+                label_statusm.setText("Site added, remember to save!");
             } else {
                 JOptionPane.showMessageDialog(null, "Decrypt the file before adding new data.");
             }
@@ -405,6 +437,7 @@ public class MainModule extends javax.swing.JFrame {
         } catch (IOException ex) {
             Logger.getLogger(MainModule.class.getName()).log(Level.SEVERE, null, ex);
         }
+        
     }//GEN-LAST:event_btn_saveActionPerformed
     //Decrypt button
     private void btn_decryptActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_decryptActionPerformed
@@ -437,6 +470,11 @@ public class MainModule extends javax.swing.JFrame {
     private void text_userActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_text_userActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_text_userActionPerformed
+
+    private void btn_copy1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_copy1ActionPerformed
+        // TODO add your handling code here:
+        copyPassword();
+    }//GEN-LAST:event_btn_copy1ActionPerformed
 
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
@@ -477,6 +515,7 @@ public class MainModule extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btn_add;
     private javax.swing.JButton btn_copy;
+    private javax.swing.JButton btn_copy1;
     private javax.swing.JButton btn_decrypt;
     private javax.swing.JButton btn_remove;
     private javax.swing.JButton btn_save;
@@ -517,6 +556,7 @@ public class MainModule extends javax.swing.JFrame {
             btn_save.setEnabled(true);
             btn_remove.setEnabled(true);
             btn_copy.setEnabled(true);
+            btn_copy1.setEnabled(true);
             return 1;
         }
 
@@ -539,14 +579,19 @@ public class MainModule extends javax.swing.JFrame {
 
         @Override
         protected Integer doInBackground() throws Exception {
+            if(table_data.getSelectedRows().length>0){
+                table_data.clearSelection();
+            }
             btn_decrypt.setEnabled(false);
             btn_add.setEnabled(false);
             btn_save.setEnabled(false);
             btn_remove.setEnabled(false);
             btn_copy.setEnabled(false);
+            btn_copy1.setEnabled(false);
             String matrix[][] = new String[model.getRowCount()][model.getColumnCount()];
             String pass = new String(password_general.getPassword());
             int l = model.getRowCount();
+
             for (int i = 0; i < l; i++) {
                 matrix[i][0] = model.getValueAt(i, 0).toString();
                 matrix[i][1] = model.getValueAt(i, 1).toString();
@@ -554,9 +599,13 @@ public class MainModule extends javax.swing.JFrame {
                 //publish(l, i);
             }
             CryptoModule.file_encrypt(matrix, pass, file);
-            cleantable();
+            //cleantable();
+            for (int i = 0; i < l; i++) {
+                model.removeRow(0);
+            }
             btn_decrypt.setEnabled(true);
             label_statusm.setText("Data was encrypted successfully");
+   
             return 1;
         }
 
